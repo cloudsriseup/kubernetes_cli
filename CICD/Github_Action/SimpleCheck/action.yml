@@ -1,0 +1,25 @@
+name: 'Kubes operational security linting'
+description: 'diffs privs against kubernetes workloads with a valid PR'
+
+inputs:
+  src:
+    description: 'Source YAML directory in master'
+    required: true
+    default: ''
+  trgt:
+    description: 'Target YAML directory in pull request'
+    required: true
+    default: ''
+outputs:
+  escalation_report:
+    description: 'Kubernetes linting report via JSON'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.src }}
+    - ${{ inputs.trgt }}
+branding:
+  icon: alert-circle
+  color: red
+
